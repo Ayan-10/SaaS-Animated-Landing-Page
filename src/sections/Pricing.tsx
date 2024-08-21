@@ -88,6 +88,7 @@ export const Pricing = () => {
                   "card",
                   inverse === true && "border-black bg-black text-white/60"
                 )}
+                key={title}
               >
                 <div className="flex justify-between">
                   <h3
