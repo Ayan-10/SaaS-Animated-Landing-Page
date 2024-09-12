@@ -1,6 +1,7 @@
 "use client";
 
 import productImage from "@/assets/product-image.png";
+import productDarkImage from "@/assets/app-screen.png";
 import Image from "next/image";
 import pyramidImage from "@/assets/pyramid.png";
 import tubeImage from "@/assets/tube.png";
@@ -23,7 +24,7 @@ export const ProductShowcase = () => {
   return (
     <section
       ref={sectRef}
-      className="bg-gradient-to-b from-[#FFFFFF] to-[#D2DCFF] py-24 overflow-x-clip"
+      className="bg-gradient-to-b from-[#FFFFFF] to-[#D2DCFF] py-24 overflow-x-clip dark:from-black dark:to-[#5D2CAB]"
     >
       <div className="container">
         <div className="section-heading">
@@ -39,7 +40,8 @@ export const ProductShowcase = () => {
             for Framer.
           </p>
         </div>
-        <div className="relative">
+        <Image src={productDarkImage} alt="Product Image" className="hidden dark:block mt-14" />
+        <div className="relative dark:hidden">
           <Image src={productImage} alt="Product Image" className="mt-10" />
           <motion.img
             src={pyramidImage.src}

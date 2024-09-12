@@ -9,6 +9,7 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import { useRef } from "react";
+import { useTheme } from "next-themes";
 
 const pricingTiers = [
   {
@@ -63,8 +64,11 @@ const pricingTiers = [
 ];
 
 export const Pricing = () => {
+
+  const { theme, setTheme } = useTheme();
+
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-white dark:bg-gradient-to-b dark:from-[#5D2CAB] dark:to-black">
       <div className="container">
         <div className="section-heading">
           <h2 className="section-title">Pricing</h2>
@@ -86,7 +90,8 @@ export const Pricing = () => {
               <div
                 className={twMerge(
                   "card",
-                  inverse === true && "border-black bg-black text-white/60"
+                  inverse === true &&
+                    "border-black bg-black text-white/60 dark:bg-black"
                 )}
                 key={title}
               >
@@ -101,17 +106,18 @@ export const Pricing = () => {
                   </h3>
                   {popular && (
                     <div className="inline-flex text-sm px-4 py-1.5 rounded-xl border border-white/20">
-                      <motion.span 
-                      animate = {{
-                        backgroundPositionX: "-100%"
-                      }}
-                      transition={{
-                        duration:1,
-                        repeat: Infinity,
-                        ease: 'linear',
-                        repeatType: "loop"
-                      }}
-                      className="bg-[linear-gradient(to_right,#DD7DDF,#E1CD86,#BBCB92,#71C2EF,#3BFFFF,#DD7DDF,#DD7DDF,#E1CD86,#BBCB92,#71C2EF,#3BFFFF,#DD7DDF)] [background-size:200%] text-transparent bg-clip-text font-medium">
+                      <motion.span
+                        animate={{
+                          backgroundPositionX: "-100%",
+                        }}
+                        transition={{
+                          duration: 1,
+                          repeat: Infinity,
+                          ease: "linear",
+                          repeatType: "loop",
+                        }}
+                        className="bg-[linear-gradient(to_right,#DD7DDF,#E1CD86,#BBCB92,#71C2EF,#3BFFFF,#DD7DDF,#DD7DDF,#E1CD86,#BBCB92,#71C2EF,#3BFFFF,#DD7DDF)] [background-size:200%] text-transparent bg-clip-text font-medium"
+                      >
                         Popular
                       </motion.span>
                     </div>
@@ -125,17 +131,32 @@ export const Pricing = () => {
                     /month
                   </span>
                 </div>
-                <button
-                  className={twMerge(
-                    "btn btn-primary w-full mt-[30px]",
-                    inverse === true && "bg-white text-black"
-                  )}
-                >
-                  {buttonText}
-                </button>
+                {theme === "light" ? (
+                  <button
+                    className={twMerge(
+                      "btn btn-primary w-full mt-[30px]",
+                      inverse === true && "bg-white text-black"
+                    )}
+                  >
+                    {buttonText}
+                  </button>
+                ) : (
+                  <button
+                    className={twMerge(
+                      "btn dark:bg-black dark:text-white w-full mt-[30px]",
+                      inverse === true && "dark:bg-white dark:text-black"
+                    )}
+                  >
+                    {buttonText}
+                  </button>
+                )}
+
                 <ul className="flex flex-col gap-5 mt-8">
                   {features.map((feature) => (
-                    <li className="text-sm flex items-center gap-4" key={feature}>
+                    <li
+                      className="text-sm flex items-center gap-4"
+                      key={feature}
+                    >
                       <CheckIcon className="h-6 w-6" />
                       <span>{feature}</span>
                     </li>
