@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={twMerge(dmSans.className, "antialiased bg-[#EAEEFE]")}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
