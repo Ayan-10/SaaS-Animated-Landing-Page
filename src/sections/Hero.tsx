@@ -85,24 +85,38 @@ export const Hero = () => {
                     ease: "easeInOut",
                   }}
                 />
-                <motion.img
-                  src={cylinderImage.src}
-                  width={220}
-                  height={220}
-                  alt="Cyliner Image"
+                <motion.div
                   className="hidden md:block -top-8 -left-32 md:absolute"
-                  style={{ translateY: translateY }}
-                />
-                <motion.img
-                  src={noodleImage.src}
-                  width={220}
-                  alt="Cyliner Image"
+                  drag
+                  dragSnapToOrigin
+                >
+                  <motion.img
+                    src={cylinderImage.src}
+                    width={220}
+                    height={220}
+                    alt="Cyliner Image"
+                    className="max-w-none"
+                    draggable="false"
+                    style={{ translateY: translateY }}
+                  />
+                </motion.div>
+                <motion.div
                   className="hidden lg:block absolute top-[524px] left-[448px] rotate-[30deg]"
+                  drag
+                  dragSnapToOrigin
                   style={{
                     rotate: 30,
                     translateY: translateY,
                   }}
-                />
+                >
+                  <motion.img
+                    src={noodleImage.src}
+                    width={220}
+                    alt="Cyliner Image"
+                    className="max-w-none"
+                    draggable="false"
+                  />
+                </motion.div>
               </div>
             </div>
           </div>
@@ -136,20 +150,36 @@ export const Hero = () => {
                   One Task
                   <br /> at a Time
                 </h1>
-                <Image
-                  src={cursorImage}
-                  alt=""
-                  height={200}
-                  width={200}
-                  className="absolute right-[500px] top-[108px] hidden md:inline"
-                />
-                <Image
-                  src={messageImage}
-                  alt=""
-                  height={200}
-                  width={200}
-                  className="absolute top-[56px] left-[520px] hidden md:inline"
-                />
+                <motion.div
+                  className="absolute right-[500px] top-[160px] hidden md:inline"
+                  drag
+                  dragSnapToOrigin
+                >
+                  <motion.img
+                    src={cursorImage.src}
+                    alt=""
+                    height={200}
+                    width={200}
+                    className="max-w-none"
+                    draggable="false"
+                    style={{ translateY: translateY }}
+                  />
+                </motion.div>
+                <motion.div
+                  className="absolute top-[86px] left-[520px] hidden md:inline"
+                  drag
+                  dragSnapToOrigin
+                >
+                  <motion.img
+                    src={messageImage.src}
+                    alt=""
+                    height={200}
+                    width={200}
+                    className="max-w-none"
+                    draggable="false"
+                    style={{ translateY: translateY }}
+                  />
+                </motion.div>
               </div>
             </div>
             <div className="flex justify-center">
