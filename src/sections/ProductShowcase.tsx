@@ -15,12 +15,19 @@ import { useRef } from "react";
 
 export const ProductShowcase = () => {
   const sectRef = useRef(null);
-  const {scrollYProgress} = useScroll({
+  const { scrollYProgress } = useScroll({
     target: sectRef,
-    offset: ['start end', 'end start']
-  })
+    offset: ["start end", "end start"],
+  });
 
-  const translateY = useTransform(scrollYProgress, [0,1], [150, -150])
+  const { scrollYProgress: scrollImage } = useScroll({
+    target: sectRef,
+    offset: ["start end", "end end"],
+  });
+
+  const translateY = useTransform(scrollYProgress, [0, 1], [150, -150]);
+  const rotateX = useTransform(scrollImage, [0, 1], [15, 0]);
+  const opacity = useTransform(scrollImage, [0, 1], [0.5, 1]);
   return (
     <section
       ref={sectRef}
@@ -40,9 +47,30 @@ export const ProductShowcase = () => {
             for Framer.
           </p>
         </div>
-        <Image src={productDarkImage} alt="Product Image" className="hidden dark:block mt-14" />
+        <motion.div
+          style={{
+            opacity: opacity,
+            rotateX: rotateX,
+            transformPerspective: "800px",
+          }}
+        >
+          <Image
+            src={productDarkImage}
+            alt="Product Image"
+            className="hidden dark:block mt-14"
+          />
+        </motion.div>
+
         <div className="relative dark:hidden">
-          <Image src={productImage} alt="Product Image" className="mt-10" />
+          <motion.div
+            style={{
+              opacity: opacity,
+              rotateX: rotateX,
+              transformPerspective: "800px",
+            }}
+          >
+            <Image src={productImage} alt="Product Image" className="mt-10" />
+          </motion.div>
           <motion.img
             src={pyramidImage.src}
             alt="pyramoid Image"

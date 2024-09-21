@@ -1,8 +1,9 @@
-'use client'
+"use client";
 import PlusIcon from "@/assets/plus.svg";
 import MinusIcon from "@/assets/minus.svg";
 import React from "react";
 import { twMerge } from "tailwind-merge";
+import { motion, AnimatePresence } from "framer-motion";
 
 const items = [
   {
@@ -34,16 +35,30 @@ const AccordionItem = ({
   question: string;
   answer: string;
 }) => {
-    const [isOpen, setIsOpen] = React.useState(false)
-    return (
-      <div className="py-7 border-b border-black/30 dark:border-white/30" onClick={() => setIsOpen(!isOpen)}>
-        <div className="flex items-center ">
-          <span className="flex-1 text-lg font-bold">{question}</span>
-          {isOpen ? <MinusIcon/> : <PlusIcon />}
-        </div>
-        <div className={twMerge("hidden", isOpen === true && "mt-4 block" )}>{answer}</div>
+  const [isOpen, setIsOpen] = React.useState(false);
+  return (
+    <div
+      className="py-7 border-b border-black/30 dark:border-white/30"
+      onClick={() => setIsOpen(!isOpen)}
+    >
+      <div className="flex items-center ">
+        <span className="flex-1 text-lg font-bold">{question}</span>
+        {isOpen ? <MinusIcon /> : <PlusIcon />}
       </div>
-    );
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            // className={twMerge("hidden", isOpen === true && "mt-4 block")}
+            initial={{ opacity: 0, height: 0, marginTop: 0 }}
+            animate={{ opacity: 1, height: "auto", marginTop: "16px" }}
+            exit={{ opacity: 0, height: 0, marginTop: 0 }}
+          >
+            {answer}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
 };
 
 export const FAQs = () => {
@@ -53,7 +68,7 @@ export const FAQs = () => {
         <h2 className="section-title">Frequently asked questions</h2>
         <div className="mt-12 max-w-[648px] mx-auto">
           {items.map(({ question, answer }) => (
-            <AccordionItem question={question} answer={answer} key={question}/>
+            <AccordionItem question={question} answer={answer} key={question} />
           ))}
         </div>
       </div>
